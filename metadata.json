@@ -1,0 +1,6 @@
+{
+  "name": "Sleek Telemetry Dashboard",
+  "description": "A high-performance backend telemetry and control panel interface built with Tailwind CSS, featuring live telemetry streams, dynamic metric monitoring, and system metrics visualization.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
