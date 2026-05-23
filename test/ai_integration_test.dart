@@ -4,12 +4,15 @@ import 'package:adaptive_wellness_coach/adaptive_wellness_ai.dart';
 
 void main() {
   test('analysis pipeline returns structured AI-ready output', () async {
+    await EnvConfig.load();
+
+    final hasApiKey = EnvConfig.geminiApiKey.isNotEmpty;
+
     final pipeline = InsightPipeline(
       repository: DemoBehaviorRepository(),
       memoryStore: ContextMemoryStore(),
-      geminiClient: GeminiClient(
-        apiKey: '',
-        enableNetworkCalls: false,
+      geminiClient: GeminiClient.fromEnv(
+        enableNetworkCalls: hasApiKey,
       ),
     );
 
@@ -22,5 +25,5 @@ void main() {
     expect(daily.charts['sleep'], isNotEmpty);
     expect(daily.aiNarrative.model, GeminiClient.flashModel);
     expect(weekly.aiNarrative.model, GeminiClient.proModel);
-  });
+  }, timeout: const Timeout(Duration(seconds: 60)));
 }
